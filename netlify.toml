@@ -1,7 +1,11 @@
 [build]
-  command = "vite build"
-  publish = "dist/client"
+  command = "npm run build"
+  publish = ".output/public"
 
-[dev]
-  command = "vite dev"
-  port = 5173
+[build.environment]
+  NITRO_PRESET = "netlify fontends"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
