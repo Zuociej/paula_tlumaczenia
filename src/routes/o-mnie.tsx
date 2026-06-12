@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteLayout } from "../components/site-layout"; // <-- Zmienione na ścieżkę względną dla bezpieczeństwa SSR
-import { useIntersectionObserver } from "../hooks/use-intersection-observer"; // <-- Zmienione na ścieżkę względną
-import deskImage from "../assets/biurko.png"; // <-- Zmienione na ścieżkę względną
+import { SiteLayout } from "../components/site-layout";
+import { useIntersectionObserver } from "../hooks/use-intersection-observer";
+import deskImage from "../assets/biurko.png";
+import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/o-mnie")({
   head: () => ({
@@ -27,31 +28,12 @@ export const Route = createFileRoute("/o-mnie")({
   component: OMnie,
 });
 
-const facts = [
-  { 
-    label: "Wpisana na listę", 
-    value: "Ministra Sprawiedliwości",
-    url: "https://arch-bip.ms.gov.pl/pl/rejestry-i-ewidencje/tlumacze-przysiegli/lista-tlumaczy-przysieglych/translator,661.html"
-  },
-  { 
-    label: "Filologia włoska", 
-    value: "Studia magisterskie i podyplomowe" 
-  },
-  { 
-    label: "Doświadczenie", 
-    value: "Praktyka od 2005 roku" 
-  },
-];
-
 function OMnie() {
-  // Bezpieczna powłoka dla hooka obserwatora, zapobiegająca crashom na serwerze
   const observer = useIntersectionObserver();
-  
-  // Jeśli kod wykonuje się na serwerze (SSR), domyślnie ustawiamy stan widoczny,
-  // aby roboty Google widziały treść, a właściwy observer odpali się dopiero w przeglądarce.
   const isServer = typeof window === "undefined";
   const isVisible = isServer ? true : observer.isVisible;
   const aboutRef = observer.ref;
+  const { t } = useLanguage();
 
   return (
     <SiteLayout>
@@ -67,27 +49,24 @@ function OMnie() {
             </div>
 
             <div className="space-y-8">
-              <span className="text-xs uppercase tracking-[0.25em] text-primary">O mnie</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-primary">{t.about.badge}</span>
               <h2 className={`font-display text-4xl text-gold transition-all duration-700 ${isVisible ? "animate-slide-up" : ""}`}>
-                Tłumacz przysięgły z pasją do języka włoskiego.
+                {t.about.title}
               </h2>
               <div className={`space-y-6 text-lg leading-8 text-muted-foreground transition-all duration-700 ${isVisible ? "animate-slide-up" : ""}`}>
-                <p>
-                  Nazywam się Paula Janowska-Kiełkiewicz. Od lat specjalizuję się w tłumaczeniach przysięgłych i kontaktach formalnych między Polską a Włochami. W mojej pracy łączę znajomość języka, praktykę prawną i staranność w dopracowaniu szczegółów.
-                </p>
-                <p>
-                  Każdy dokument traktuję indywidualnie, dbając o terminologię, kontekst i pełną dyskrecję. Dla klientów prywatnych i firm realizuję zlecenia zarówno stacjonarnie we Wrocławiu, jak i zdalnie.
-                </p>
+                <p>{t.about.p1}</p>
+                <p>{t.about.p2}</p>
               </div>
 
               <div className={`grid gap-4 sm:grid-cols-3 transition-all duration-700 ${isVisible ? "animate-slide-up" : ""}`}>
-                {facts.map((fact, index) => {
+                {t.about.list.map((fact, index) => {
+                  const url = index === 0 ? "https://arch-bip.ms.gov.pl/pl/rejestry-i-ewidencje/tlumacze-przysiegli/lista-tlumaczy-przysieglych/translator,661.html" : undefined;
                   const cardClasses = "group block rounded-3xl border border-border bg-card p-6 transition-all duration-500 hover:bg-accent/40 hover:border-foreground/20 hover:shadow-sm";
                   const innerContent = (
                     <>
                       <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground flex items-center gap-1.5">
                         {fact.label}
-                        {fact.url && (
+                        {url && (
                           <span className="inline-block transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-primary text-sm font-light">↗</span>
                         )}
                       </p>
@@ -97,11 +76,11 @@ function OMnie() {
                     </>
                   );
 
-                  if (fact.url) {
+                  if (url) {
                     return (
                       <a
                         key={index}
-                        href={fact.url}
+                        href={url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cardClasses}

@@ -228,17 +228,21 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { LanguageProvider } from "@/lib/i18n"; // <-- Importujemy dostawcę języka
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* TUTAJ WLECIELIŚMY Z POPRAWKĄ:
-        Dodajemy SiteNav bezpośrednio nad Outletem, aby globalna nawigacja 
-        towarzyszyła każdej podstronie serwisu.
-      */}
-      <SiteNav />
-      <Outlet />
+      <LanguageProvider>
+        {/* TUTAJ WLECIELIŚMY Z POPRAWKĄ:
+          Dodajemy SiteNav bezpośrednio nad Outletem, aby globalna nawigacja 
+          towarzyszyła każdej podstronie serwisu.
+        */}
+        <SiteNav />
+        <Outlet />
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }

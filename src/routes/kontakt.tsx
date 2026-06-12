@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "../components/site-layout";
 import { Phone, MapPin, Navigation, Mail } from "lucide-react";
 import { useIntersectionObserver } from "../hooks/use-intersection-observer";
+import { useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
@@ -28,7 +29,7 @@ export const Route = createFileRoute("/kontakt")({
 });
 
 const ADDRESS = "Kazimierska 23, 51-657 Wrocław";
-const EMAIL = "kontakt@twojadomena.pl"; 
+const EMAIL = "paola.j@wp.pl"; 
 const MAPS_QUERY = encodeURIComponent(ADDRESS);
 
 interface ContactCardProps {
@@ -70,6 +71,7 @@ function Kontakt() {
   const isServer = typeof window === "undefined";
   const contactVisible = isServer ? true : observer.isVisible;
   const contactRef = observer.ref;
+  const { t } = useLanguage();
 
   return (
     <SiteLayout>
@@ -78,24 +80,24 @@ function Kontakt() {
         className="bg-background py-20 transition-all duration-700"
       >
         <div className="mx-auto max-w-6xl px-6">
-          <span className="text-xs uppercase tracking-[0.25em] text-primary">Contact</span>
+          <span className="text-xs uppercase tracking-[0.25em] text-primary">{t.contact.badge}</span>
           <h1 className={`mt-3 font-display text-4xl text-foreground transition-all duration-700 ${contactVisible ? "animate-slide-up" : ""}`}>
-            Porozmawiajmy o Twoim tłumaczeniu.
+            {t.contact.title}
           </h1>
           <p className={`mt-4 max-w-2xl text-muted-foreground transition-all duration-700 ${contactVisible ? "animate-slide-up" : ""}`}>
-            Napisz lub zadzwoń, a przygotuję wycenę i terminową realizację dokumentów włoskich.
+            {t.contact.desc}
           </p>
 
           <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
             <div className="space-y-4">
-              <ContactCard icon={Phone} title="Telefon" index={0}>
+              <ContactCard icon={Phone} title={t.contact.phoneTitle} index={0}>
                 <a href="tel:+48603779771" className="mt-1 inline-block text-2xl font-display text-foreground hover:text-primary transition-colors focus-visible:underline">
                   +48 603 779 771
                 </a>
-                <p className="mt-1 text-xs text-muted-foreground">Pn–Pt, 9:00–18:00</p>
+                <p className="mt-1 text-xs text-muted-foreground">{t.contact.phoneDesc}</p>
               </ContactCard>
 
-              <ContactCard icon={MapPin} title="Biuro" index={1}>
+              <ContactCard icon={MapPin} title={t.contact.officeTitle} index={1}>
                 <p className="mt-1 text-2xl font-display text-foreground">Kazimierska 23</p>
                 <p className="text-muted-foreground">{ADDRESS.split(',')[1].trim()}</p>
                 <a
@@ -104,19 +106,22 @@ function Kontakt() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2 text-sm font-medium text-primary-foreground shadow-gold transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <Navigation className="h-4 w-4" /> Wyznacz trasę
+                  <Navigation className="h-4 w-4" /> {t.contact.officeAction}
                 </a>
               </ContactCard>
 
-              <ContactCard icon={Mail} title="Wycena" index={2}>
-                <p className="mt-1 text-muted-foreground">
-                  Prześlij dokumenty, a przygotuję bezpłatną i pewną wycenę.
+              <ContactCard icon={Mail} title={t.contact.pricingTitle} index={2}>
+                <a href={`mailto:${EMAIL}`} className="mt-1 inline-block text-2xl font-display text-foreground hover:text-primary transition-colors focus-visible:underline">
+                  {EMAIL}
+                </a>
+                <p className="mt-2 text-muted-foreground">
+                  {t.contact.pricingDesc}
                 </p>
                 <a
                   href={`mailto:${EMAIL}`}
                   className="mt-4 inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent transition-colors"
                 >
-                  <Mail className="h-4 w-4" /> Wyślij dokumenty do wyceny
+                  <Mail className="h-4 w-4" /> {t.contact.pricingAction}
                 </a>
               </ContactCard>
             </div>

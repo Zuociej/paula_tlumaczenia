@@ -1,23 +1,53 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-// Definicja linków dopasowana do struktury Twoich plików w folderze /routes
-const links = [
-  { to: "/", label: "Strona główna" },
-  { to: "/o-mnie", label: "O mnie" },
-  { to: "/uslugi", label: "Usługi" },
-  { to: "/kontakt", label: "Kontakt" },
-] as const;
+function LanguageSwitcher() {
+  const { language, setLanguage } = useLanguage();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="flex items-center gap-2 rounded-md border border-border bg-background px-2 md:px-3 py-1.5 md:py-2 text-sm font-medium text-foreground hover:bg-accent transition-colors">
+          <span className="text-base leading-none">{language === "pl" ? "🇵🇱" : "🇮🇹"}</span>
+          <span className="font-display md:font-sans">{language === "pl" ? "PL" : "IT"}</span>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-[80px]">
+        <DropdownMenuItem onClick={() => setLanguage("pl")} className="gap-2 cursor-pointer font-medium">
+          <span className="text-base leading-none">🇵🇱</span> PL
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setLanguage("it")} className="gap-2 cursor-pointer font-medium">
+          <span className="text-base leading-none">🇮🇹</span> IT
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const { language, t } = useLanguage();
+
+  const links = [
+    { to: "/", label: t.nav.home },
+    { to: "/o-mnie", label: t.nav.about },
+    { to: "/uslugi", label: t.nav.services },
+    { to: "/kontakt", label: t.nav.contact },
+  ] as const;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         
-        <Link to="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>\
+        <Link to="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="grid h-10 w-10 place-items-center rounded-full bg-gold font-display text-xl text-primary-foreground shadow-gold">
             PJK
           </span>
@@ -26,7 +56,7 @@ export function SiteNav() {
               Paula Janowska-Kiełkiewicz
             </span>
             <span className="text-[11px] uppercase tracking-[0.25em] text-primary">
-              Tłumacz przysięgły · Języka włoskiego
+              {language === "pl" ? "Tłumacz przysięgły · Języka włoskiego" : "Traduttrice giurata · Lingua italiana"}
             </span>
           </span>
         </Link>
@@ -37,7 +67,7 @@ export function SiteNav() {
             <Link
               key={l.to}
               to={l.to}
-              activeOptions={{ exact: true }} // Aktywuje podświetlenie tylko na konkretnej podstronie
+              activeOptions={{ exact: true }}
               activeProps={{ className: "text-foreground font-medium" }}
               className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -48,19 +78,25 @@ export function SiteNav() {
             to="/kontakt"
             className="ml-3 rounded-md bg-gold px-4 py-2 text-sm font-medium text-primary-foreground shadow-gold transition-transform hover:-translate-y-0.5"
           >
-            Wycena
+            {t.nav.pricing}
           </Link>
+          <div className="ml-4">
+            <LanguageSwitcher />
+          </div>
         </nav>
 
-        {/* Przycisk menu mobilnego (Hamburger) */}
-        <button
-          aria-label={open ? "Zamknij menu" : "Otwórz menu"}
-          aria-expanded={open}
-          className="md:hidden rounded-md p-2 text-foreground focus-visible:outline-2 focus-visible:outline-primary"
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Przycisk menu mobilnego i zmiana języka */}
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <button
+            aria-label={open ? "Zamknij menu" : "Otwórz menu"}
+            aria-expanded={open}
+            className="rounded-md p-2 text-foreground focus-visible:outline-2 focus-visible:outline-primary"
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Rozwijane menu mobilne (Mobile Overlay) */}
@@ -84,7 +120,7 @@ export function SiteNav() {
               className="mt-2 block rounded-lg bg-gold px-4 py-3 text-center text-base font-medium text-primary-foreground shadow-gold"
               onClick={() => setOpen(false)}
             >
-              Wycena
+              {t.nav.pricing}
             </Link>
           </nav>
         </div>
