@@ -43,20 +43,42 @@
 
   /* Rejestracja klatek kluczowych (keyframes) */
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
@@ -67,10 +89,10 @@
   --background: oklch(0.16 0.012 250);
   --foreground: oklch(0.96 0.01 90);
 
-  --card: oklch(0.20 0.014 250);
+  --card: oklch(0.2 0.014 250);
   --card-foreground: oklch(0.96 0.01 90);
 
-  --popover: oklch(0.20 0.014 250);
+  --popover: oklch(0.2 0.014 250);
   --popover-foreground: oklch(0.96 0.01 90);
 
   /* Warm gold — primary accent */
@@ -83,20 +105,21 @@
   --muted: oklch(0.24 0.014 250);
   --muted-foreground: oklch(0.72 0.02 90);
 
-  --accent: oklch(0.30 0.02 78);
+  --accent: oklch(0.3 0.02 78);
   --accent-foreground: oklch(0.96 0.01 90);
 
   --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.30 0.014 250);
+  --border: oklch(0.3 0.014 250);
   --input: oklch(0.26 0.014 250);
   --ring: oklch(0.78 0.12 78);
 
-  --italy-green: oklch(0.60 0.15 145);
-  --italy-red: oklch(0.58 0.20 25);
+  --italy-green: oklch(0.6 0.15 145);
+  --italy-red: oklch(0.58 0.2 25);
 
-  --gradient-hero: radial-gradient(
+  --gradient-hero:
+    radial-gradient(
       120% 80% at 80% 10%,
       color-mix(in oklab, var(--primary) 22%, transparent),
       transparent 60%
@@ -107,11 +130,7 @@
       transparent 60%
     ),
     linear-gradient(180deg, oklch(0.14 0.012 250), oklch(0.18 0.014 250));
-  --gradient-gold: linear-gradient(
-    135deg,
-    oklch(0.85 0.13 82),
-    oklch(0.68 0.12 70)
-  );
+  --gradient-gold: linear-gradient(135deg, oklch(0.85 0.13 82), oklch(0.68 0.12 70));
   --shadow-elegant: 0 30px 80px -20px oklch(0 0 0 / 0.55);
   --shadow-gold: 0 10px 40px -10px color-mix(in oklab, var(--primary) 35%, transparent);
 }
@@ -133,24 +152,39 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
   }
 }
 
 /* Nowa składnia definiowania narzędzi w Tailwind v4 */
-@utility font-display { font-family: var(--font-display); }
-@utility bg-hero { background: var(--gradient-hero); }
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility bg-hero {
+  background: var(--gradient-hero);
+}
 @utility bg-hero-home {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-@utility bg-gold { background: var(--gradient-gold); }
-@utility shadow-elegant { box-shadow: var(--shadow-elegant); }
-@utility shadow-gold { box-shadow: var(--shadow-gold); }
-@utility text-balance { text-wrap: balance; }
+@utility bg-gold {
+  background: var(--gradient-gold);
+}
+@utility shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+@utility shadow-gold {
+  box-shadow: var(--shadow-gold);
+}
+@utility text-balance {
+  text-wrap: balance;
+}
 @utility tricolore {
   background: linear-gradient(
     90deg,
@@ -173,8 +207,18 @@
 }
 
 /* Klasy opóźnień (Delays) przepisane na natywną składnię Tailwind */
-@utility animate-delay-1 { animation-delay: 0.1s; }
-@utility animate-delay-2 { animation-delay: 0.2s; }
-@utility animate-delay-3 { animation-delay: 0.3s; }
-@utility animate-delay-4 { animation-delay: 0.4s; }
-@utility animate-delay-5 { animation-delay: 0.5s; }
+@utility animate-delay-1 {
+  animation-delay: 0.1s;
+}
+@utility animate-delay-2 {
+  animation-delay: 0.2s;
+}
+@utility animate-delay-3 {
+  animation-delay: 0.3s;
+}
+@utility animate-delay-4 {
+  animation-delay: 0.4s;
+}
+@utility animate-delay-5 {
+  animation-delay: 0.5s;
+}

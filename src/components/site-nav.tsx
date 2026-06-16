@@ -8,7 +8,7 @@ import { useLanguage } from "@/lib/i18n";
 function LanguageSwitcher() {
   // Temporary hidden until fixed
   return null;
-  
+
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ function LanguageSwitcher() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 rounded-md border border-border bg-background px-2 md:px-3 py-1.5 md:py-2 text-sm font-medium text-foreground hover:bg-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
@@ -72,17 +72,16 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        
         <Link to="/" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="grid h-10 w-10 place-items-center rounded-full bg-gold font-display text-xl text-primary-foreground shadow-gold">
             PJK
           </span>
           <span className="flex flex-col leading-tight">
-            <span className="font-display text-lg text-foreground">
-              Paula Janowska-Kiełkiewicz
-            </span>
+            <span className="font-display text-lg text-foreground">Paula Janowska-Kiełkiewicz</span>
             <span className="text-[11px] uppercase tracking-[0.25em] text-primary">
-              {language === "pl" ? "Tłumacz przysięgły · Języka włoskiego" : "Traduttrice giurata · Lingua italiana"}
+              {language === "pl"
+                ? "Tłumacz przysięgły · Języka włoskiego"
+                : "Traduttrice giurata · Lingua italiana"}
             </span>
           </span>
         </Link>

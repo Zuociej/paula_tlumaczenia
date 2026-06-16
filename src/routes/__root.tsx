@@ -91,29 +91,67 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "language", content: "Polish" },
       { name: "author", content: "Paula Janowska-Kiełkiewicz" },
-      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
-      
-      { property: "og:title", content: "Paula Janowska-Kiełkiewicz — Tłumacz przysięgły j. włoskiego" },
-      { property: "og:description", content: "Profesjonalne tłumaczenia przysięgłe, prawne, biznesowe i ustne z języka włoskiego we Wrocławiu." },
+      {
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
+
+      {
+        property: "og:title",
+        content: "Paula Janowska-Kiełkiewicz — Tłumacz przysięgły j. włoskiego",
+      },
+      {
+        property: "og:description",
+        content:
+          "Profesjonalne tłumaczenia przysięgłe, prawne, biznesowe i ustne z języka włoskiego we Wrocławiu.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Paula Janowska-Kiełkiewicz — Tłumacz" },
       { property: "og:locale", content: "pl_PL" },
-      
+
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Paula Janowska-Kiełkiewicz — Tłumacz przysięgły" },
-      { name: "twitter:description", content: "Tłumaczenia przysięgłe, prawne, biznesowe i ustne z języka włoskiego" },
-      
+      {
+        name: "twitter:description",
+        content: "Tłumaczenia przysięgłe, prawne, biznesowe i ustne z języka włoskiego",
+      },
+
       { name: "geo.placename", content: "Wrocław, Poland" },
       { name: "geo.region", content: "PL-DS" },
       { name: "ICBM", content: "51.1079,17.0385" },
       { name: "msapplication-TileColor", content: "#2d89ef" },
       { name: "theme-color", content: "#ffffff" },
-      
-      { name: "description", lang: "pl", content: "Tłumacz przysięgły j. włoskiego we Wrocławiu. Tłumaczenia urzędowe, prawne i biznesowe." },
-      { name: "description", lang: "en", content: "Sworn Polish-Italian translator in Wrocław. Official, legal and business translations. Notarized Italian translator." },
-      { name: "description", lang: "de", content: "Beeidigter Übersetzer für Italienisch in Breslau. Beurkundete Übersetzungen, Rechtsdokumente, Geschäftsübersetzungen." },
-      { name: "description", lang: "it", content: "Traduttore giurato italiano a Breslavia. Traduzioni ufficiali, legali e commerciali. Interpretariato simultaneo." },
-      { name: "description", lang: "uk", content: "Присяжний перекладач італійської мови у Вроцлаві. Офіційні, юридичні та комерційні переклади." },
+
+      {
+        name: "description",
+        lang: "pl",
+        content:
+          "Tłumacz przysięgły j. włoskiego we Wrocławiu. Tłumaczenia urzędowe, prawne i biznesowe.",
+      },
+      {
+        name: "description",
+        lang: "en",
+        content:
+          "Sworn Polish-Italian translator in Wrocław. Official, legal and business translations. Notarized Italian translator.",
+      },
+      {
+        name: "description",
+        lang: "de",
+        content:
+          "Beeidigter Übersetzer für Italienisch in Breslau. Beurkundete Übersetzungen, Rechtsdokumente, Geschäftsübersetzungen.",
+      },
+      {
+        name: "description",
+        lang: "it",
+        content:
+          "Traduttore giurato italiano a Breslavia. Traduzioni ufficiali, legali e commerciali. Interpretariato simultaneo.",
+      },
+      {
+        name: "description",
+        lang: "uk",
+        content:
+          "Присяжний перекладач італійської мови у Вроцлаві. Офіційні, юридичні та комерційні переклади.",
+      },
     ],
     links: [
       { rel: "canonical", href: "https://paula-tlumacz.pl" },
@@ -139,7 +177,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "LocalBusiness",
           "@id": "https://paula-tlumacz.pl",
           name: "Paula Janowska-Kiełkiewicz — Tłumacz przysięgły",
-          description: "Profesjonalne tłumaczenia przysięgłe z języka włoskiego. Urzędowe, prawne, biznesowe i tłumaczenia ustne.",
+          description:
+            "Profesjonalne tłumaczenia przysięgłe z języka włoskiego. Urzędowe, prawne, biznesowe i tłumaczenia ustne.",
           url: "https://paula-tlumacz.pl",
           image: "https://paula-tlumacz.pl/og-image.jpg",
           telephone: "+48603779771",
@@ -200,9 +239,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "BreadcrumbList",
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://paula-tlumacz.pl/" },
-            { "@type": "ListItem", position: 2, name: "Services", item: "https://paula-tlumacz.pl/uslugi" },
-            { "@type": "ListItem", position: 3, name: "About", item: "https://paula-tlumacz.pl/o-mnie" },
-            { "@type": "ListItem", position: 4, name: "Contact", item: "https://paula-tlumacz.pl/kontakt" },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Services",
+              item: "https://paula-tlumacz.pl/uslugi",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: "About",
+              item: "https://paula-tlumacz.pl/o-mnie",
+            },
+            {
+              "@type": "ListItem",
+              position: 4,
+              name: "Contact",
+              item: "https://paula-tlumacz.pl/kontakt",
+            },
           ],
         }),
       },
