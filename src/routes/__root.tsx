@@ -208,25 +208,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="pl">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 import { LanguageProvider } from "@/lib/i18n"; // <-- Importujemy dostawcę języka
 
@@ -236,12 +221,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
+        <HeadContent />
         {/* TUTAJ WLECIELIŚMY Z POPRAWKĄ:
           Dodajemy SiteNav bezpośrednio nad Outletem, aby globalna nawigacja 
           towarzyszyła każdej podstronie serwisu.
         */}
         <SiteNav />
         <Outlet />
+        <Scripts />
       </LanguageProvider>
     </QueryClientProvider>
   );

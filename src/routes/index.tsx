@@ -7,19 +7,19 @@ import { useLanguage } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Tłumacz przysięgły j. włoskiego Wrocław — Paula Janowska-Kiełkiewicz" },
+      { title: "Tłumacz przysięgły języka włoskiego Wrocław — Paula Janowska-Kiełkiewicz" },
       {
         name: "description",
         content:
-          "Tłumacz przysięgły języka włoskiego we Wrocławiu — dokumenty urzędowe, prawne, biznesowe oraz tłumaczenia ustne. Notarized, certified, sworn translations.",
+          "Szukasz tłumacza przysięgłego języka włoskiego we Wrocławiu? Oferuję profesjonalne tłumaczenia urzędowe, prawnicze, biznesowe i ustne. Szybko i rzetelnie.",
       },
       {
         name: "keywords",
         content:
-          "tłumacz przysięgły, włoski, Wrocław, tłumaczenia urzędowe, tłumaczenia prawne, tłumaczenia biznesowe, tłumaczenia ustne, dokumenty, język włoski, Poland, traduttore giurato, traduzioni, interpreter, notarized translation, certified translation, sworn translator, professional translator, business translation, legal translation, official translation",
+          "tłumacz przysięgły języka włoskiego Wrocław, tłumacz włosko polski Wrocław, tłumaczenia włoski Wrocław, tłumacz przysięgły włoskiego Wrocław, tłumaczenia przysięgłe włoski Wrocław, tłumaczenia urzędowe włoski, tłumaczenia prawnicze włoski, tłumaczenia biznesowe włoski, tłumacz ustny włoski Wrocław, biuro tłumaczeń włoski Wrocław",
       },
-      { property: "og:title", content: "Tłumacz przysięgły j. włoskiego — Wrocław" },
-      { property: "og:description", content: "Profesjonalne tłumaczenia przysięgłe, prawne, biznesowe i ustne z języka włoskiego." },
+      { property: "og:title", content: "Tłumacz przysięgły języka włoskiego Wrocław — Paula Janowska-Kiełkiewicz" },
+      { property: "og:description", content: "Szukasz tłumacza przysięgłego języka włoskiego we Wrocławiu? Oferuję profesjonalne tłumaczenia urzędowe, prawnicze, biznesowe i ustne." },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
     ],

@@ -1,34 +1,60 @@
+"use client";
+
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 function LanguageSwitcher() {
+  // Temporary hidden until fixed
+  return null;
+  
   const { language, setLanguage } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectLanguage = (lang: "pl" | "it") => {
+    setLanguage(lang);
+    setIsOpen(false);
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 rounded-md border border-border bg-background px-2 md:px-3 py-1.5 md:py-2 text-sm font-medium text-foreground hover:bg-accent transition-colors">
-          <span className="text-base leading-none">{language === "pl" ? "🇵🇱" : "🇮🇹"}</span>
-          <span className="font-display md:font-sans">{language === "pl" ? "PL" : "IT"}</span>
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[80px]">
-        <DropdownMenuItem onClick={() => setLanguage("pl")} className="gap-2 cursor-pointer font-medium">
-          <span className="text-base leading-none">🇵🇱</span> PL
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setLanguage("it")} className="gap-2 cursor-pointer font-medium">
-          <span className="text-base leading-none">🇮🇹</span> IT
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="relative" ref={dropdownRef}>
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 rounded-md border border-border bg-background px-2 md:px-3 py-1.5 md:py-2 text-sm font-medium text-foreground hover:bg-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <span className="text-base leading-none">{language === "pl" ? "🇵🇱" : "🇮🇹"}</span>
+        <span className="font-display md:font-sans">{language === "pl" ? "PL" : "IT"}</span>
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 flex w-24 flex-col rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 z-[60]">
+          <button
+            onClick={() => selectLanguage("pl")}
+            className="flex items-center gap-2 w-full rounded-sm px-2 py-1.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground text-left"
+          >
+            <span className="text-base leading-none">🇵🇱</span> PL
+          </button>
+          <button
+            onClick={() => selectLanguage("it")}
+            className="flex items-center gap-2 w-full rounded-sm px-2 py-1.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground text-left"
+          >
+            <span className="text-base leading-none">🇮🇹</span> IT
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 
